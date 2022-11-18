@@ -30,6 +30,8 @@ Both VQ-VAE and the reward model are trained in seperate phases. In the final ph
 
 
 ## Architectures of Networks
+“Conv” and “TransConv” represent 1D temporal the convolution and transpose-convolution operations, respectively, and their arguments represent the input channel number, the output channel number, the kernel size, the convolution stride, the padding size on both ends of input data, and the dilation number in turn.
+
 
 |    | **Residual Block**  |
 |  ---  | :----:  |
