@@ -26,7 +26,7 @@ Moreover, a contrastive speech-gesture pre-training method is proposed to comput
 ![Alt](./Module/RewardModel.jpg)
 
 
-Both VQ-VAE and the reward model are trained in seperate phases. In the final phase, RACER adopts a simple but effective offline reinforcement learning algorithm called conservative Q-learning~(CQL) to learn the optimal policy from the augmented offline dataset.
+Both VQ-VAE and the reward model are trained in seperate phases. In the final phase, RACER adopts a simple but effective offline reinforcement learning algorithm called conservative Q-learning(CQL) to learn the optimal policy from the augmented offline dataset.
 
 
 ## Architectures of Networks
