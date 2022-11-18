@@ -12,8 +12,7 @@ RACER is a novel RL based approach to learn the optimal gesture synthesis policy
 
 
 
-!(https://github.com/RLracer/RACER/blob/main/Module/Overview.pdf)
-
+![Alt](./Module/Overview.jpg)
 
 Given a piece of speech audio and the initial gesture code $a_0$, the GPT-like Q-network represented by transformer layers autoregressively calculates the Q-values and selects a sequence of actions ($a_1,\cdots,a_T$). The action sequence will then be transformed to quantitative features by querying the codebook and finally be decoded to motion sequences by the decoder of VQ-VAE.
 
@@ -21,9 +20,13 @@ Given a piece of speech audio and the initial gesture code $a_0$, the GPT-like Q
     <img src="https://github.com/RLracer/RACER/blob/main/Module/VQ-VAE.pdf" width="150" />
 </p>
 
-
+![Alt](./Module/VQ-VAE.jpg)
 
 Moreover, a contrastive speech-gesture pre-training method is proposed to compute the rewards, which guide the RL agent to discover deeper relations from multi-modal speech-gesture data.
+
+https://github.com/RLracer/RACER/blob/main/Module/RewardModel.pdf
+
+![Alt](./Module/RewardModel.jpg)
 
 At each time step $t$, the state $s$ consists of the generated action tokens $(a_1,\dots,a_{t-1})$ and input audio. 
 Unlike existing methods which directly learn a mapping from audio features to the continuous high-dimensional motion space, RACER encodes and quantizes the motion into a finite codebook $\mathcal{Z} =\{\bm{z_i}\}^{N}_{i=1} $ by VQ-VAE, where $N$ is the size of codebook and each code $\bm{z_i}$ represents a gesture lexeme feature. The details of action design are introduced in . 
@@ -43,13 +46,18 @@ We use a GPT-like unidirectional model as the Q-network that autoregressively ou
 |  | **Input: 0; Argument:** *J*|
 |**1** |Conv(*J* × 3, 512, 4, 2, 1, 1)|
 |**2**|**RB**(p = 1, d = 1)|
-|**4** |**RB**(p = 3, d = 3)|
-|**3** |Conv(512, 512, 4, 2, 1, 1)|
-|**4** |**RB**(p = 3, d = 3)|
+|**3** |**RB**(p = 3, d = 3)|
+|**4** |**RB**(p = 9, d = 9)|
 |**5** |Conv(512, 512, 4, 2, 1, 1)|
-|**6** |**RB**(p = 9, d = 9)|
-|**7** |Conv(512, 512, 3, 1, 1, 1)|
-|   |Output: **7**|
+|**6**|**RB**(p = 1, d = 1)|
+|**7** |**RB**(p = 3, d = 3)|
+|**8** |**RB**(p = 9, d = 9)|
+|**9** |Conv(512, 512, 4, 2, 1, 1)|
+|**10**|**RB**(p = 1, d = 1)|
+|**11** |**RB**(p = 3, d = 3)|
+|**12** |**RB**(p = 9, d = 9)|
+|**13** |Conv(512, 512, 3, 1, 1, 1)|
+|   |Output: **13**|
 
 |    | **VQ-VAE Decoder**  |
 |  ---  | :----:  |
