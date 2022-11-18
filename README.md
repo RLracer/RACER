@@ -15,19 +15,21 @@ RACER is a novel RL based approach to learn the optimal gesture synthesis policy
 !(https://github.com/RLracer/RACER/blob/main/Module/Overview.pdf)
 
 
-Given a piece of speech audio and the initial gesture code $a_0$, the Q-network represented by transformer layers autoregressively calculates the Q-values and selects a sequence of actions ($a_1,\cdots,a_T$). The action sequence will then be transformed to quantitative features by querying the codebook and finally be decoded to motion sequences by the decoder of VQ-VAE.
+Given a piece of speech audio and the initial gesture code $a_0$, the GPT-like Q-network represented by transformer layers autoregressively calculates the Q-values and selects a sequence of actions ($a_1,\cdots,a_T$). The action sequence will then be transformed to quantitative features by querying the codebook and finally be decoded to motion sequences by the decoder of VQ-VAE.
+
+<p float="left>
+    <img src="https://github.com/RLracer/RACER/blob/main/Module/VQ-VAE.pdf" width="150" />
+</p>
 
 
 
-
-
-
+Moreover, a contrastive speech-gesture pre-training method is proposed to compute the rewards, which guide the RL agent to discover deeper relations from multi-modal speech-gesture data.
 
 At each time step $t$, the state $s$ consists of the generated action tokens $(a_1,\dots,a_{t-1})$ and input audio. 
 Unlike existing methods which directly learn a mapping from audio features to the continuous high-dimensional motion space, RACER encodes and quantizes the motion into a finite codebook $\mathcal{Z} =\{\bm{z_i}\}^{N}_{i=1} $ by VQ-VAE, where $N$ is the size of codebook and each code $\bm{z_i}$ represents a gesture lexeme feature. The details of action design are introduced in . 
 We use a GPT-like unidirectional model as the Q-network that autoregressively outputs action tokens following a greedy strategy. An action token $a$ will be mapped to a gesture lexeme feature $z$ and then be decoded to a specific gesture motion. Moreover, we propose a contrastive speech-gesture pre-training model to compute the immediate rewards for the actions, which will be elaborated in . 
 
-In addition, we will introduce how to train the Q-network in a fully offline manner in \cref{sec:approachOffline}.
+
 
 |    | **Residual Block**  |
 |  ---  | :----:  |
